@@ -1,0 +1,12 @@
+{
+    "ImageId": "ami-0b898040803850657",
+    "InstanceType": "t2.micro",
+    "KeyName": "B14-Key1",
+    "SubnetId": "subnet-0c1ecf62cb1b49dd9",
+    "SecurityGroups": [
+        {
+            "GroupName": "SSH-ICMP",
+            "GroupId": "sg-029f968f64beae8fa"
+        }
+    ]
+}

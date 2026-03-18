@@ -1,0 +1,9 @@
+aws ec2 describe-subnets --filters "Name=tag:env,Values=dev" --output text
+
+aws ec2 describe-subnets --filters "Name=tag:env,Values=dev" --query "Subnets[*].SubnetId" --output text
+
+aws ec2 describe-subnets --query "Subnets[*].[SubnetId, CidrBlock]" --output text
+
+aws ec2 describe-subnets --filters "Name=tag:env,Values=dev" --query "Subnets[*].[SubnetId, CidrBlock]" --output text
+
+aws ec2 describe-vpcs --filters "Name=tag:Env,Values=Dev" --output json --profile profile1 --query "Vpcs[].[VpcId, CidrBlock]"

@@ -1,0 +1,91 @@
+VPC -- Networking /Security
+
+Q1. Who generates traffic
+a. VPC
+b. Subnets
+c. EC2
+d. Elastic IP
+
+Q2. Can a subnet be part of (Assigned to) 2 Diff Availability Zone in AWS
+a. True
+b. False
+
+Explain: Bcz each AZ is a DC and each DC are isolated from another. An Subnet can be part of single AZ or DC
+
+Q3. Without using Security Groups, how can we restrict inbound traffic on IPv6
+a. Internet Gateway
+b. VPN Gateway
+c. Egress only Internet Gateway
+d. NAT Gateway
+e. None of the above
+
+Q4. With using Security Groups, how can we restrict inbound traffic for IPv6 with Internet Gateway
+a. Inbound and OUtbound -- DENY ALL
+b. Inbound and OUtbound -- ALLOW ALL
+c. Inbound -- ALLOW ALL and OUtbound -- DENY ALL
+d. Inbound -- DENY ALL and OUtbound -- ALLOW ALL
+
+Q5. By Default All the Traffic in a Security Group is
+a. Allowed
+b. Denied
+
+Q6: Can we create custom Routing Table per Subnet
+a: Yes
+b: No
+
+Q7: Can we hve multiple Internet Gateway assigned to the same VPC
+a: Yes
+b: No
+
+Q8: Can we hve multiple NAT Gateway assigned to the same VPC
+a: Yes
+b: No
+
+Q9: Can we hve multiple NAT Gateway assigned to the same Subnet
+a: Yes
+b: No
+
+Q10: Can we hve multiple egress only Internet Gateway assigned to the same VPC
+a: Yes
+b: No
+
+Q11: VPC can be part of 2 Diff Regions
+a: True
+b: False
+
+Q12: what is the feature to assign Static public Ipv4 to EC2
+a. By default available
+b. Elastic Ip
+c. No Such Feature
+
+Q13: Can we assign more than 1 public ip to an EC2
+a: Yes
+b: No
+
+Q14: Which one is chargeable?
+a. Elastic Ip
+b. Dynamic Public ip
+c. Private Ip
+d. Public ipv6
+
+Q15: wht is the default network mask for Public IPv6 from AWS
+a. /44
+b. /96
+c. /64
+d. /56
+
+Q16: How many bits is Ipv6?
+a. 32 bits
+b. 64 bits
+c. 96 bits
+d. 128 bits
+
+Q17: Can we talk directly between IPV4 and Ipv6
+a: Yes
+b: No
+
+Q18: Do u need an IPv6 address on the source Machine to talk to the Destination machine on IPv6.
+a: Yes
+b: No
+
+Q19: 

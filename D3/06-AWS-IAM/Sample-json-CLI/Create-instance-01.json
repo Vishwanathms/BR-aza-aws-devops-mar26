@@ -1,0 +1,30 @@
+{
+    "ImageId": "ami-02354e95b39ca8dec",
+    "InstanceType": "t2.micro",
+    "KeyName": "B02-2020-Key1",
+    "MaxCount": 2,
+    "MinCount": 1,
+    "Monitoring": {
+        "Enabled": true
+    },
+    "SecurityGroupIds": [
+        "sg-028500686ed2a95b4"
+    ],
+    "SubnetId": "subnet-0ce4334888ddf5c28",
+    "DisableApiTermination": true,
+    "TagSpecifications": [
+        {
+            "ResourceType": "instance",
+    		 "Tags": [
+				{
+        			"Key": "Name",
+        			"Value": "VM01"
+				},
+				{
+        			"Key": "Project",
+        			"Value": "p1"
+				}
+    		]
+	   }
+	]
+}

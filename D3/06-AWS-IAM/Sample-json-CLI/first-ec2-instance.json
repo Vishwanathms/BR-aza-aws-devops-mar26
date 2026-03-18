@@ -1,0 +1,19 @@
+{
+    "ImageId": "ami-0b898040803850657", 
+    "InstanceType": "t2.micro", 
+    "KeyName": "b14-key1", 
+    "MaxCount": 1, 
+    "MinCount": 1, 
+    "Monitoring": {
+        "Enabled": true
+    }, 
+    "SecurityGroupIds": [
+        "sg-088dcfa2ec2be9506"
+    ], 
+    "SubnetId": "subnet-0b8044d04915fd918", 
+    "UserData": "", 
+    "DisableApiTermination": true, 
+    "DryRun": false, 
+    "EbsOptimized": false, 
+    "InstanceInitiatedShutdownBehavior": "stop"
+}

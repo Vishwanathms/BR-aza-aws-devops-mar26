@@ -1,0 +1,8 @@
+{
+    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZoneId": "",
+    "CidrBlock": "172.28.0.0/24",
+    "Ipv6CidrBlock": "2600:1f18:551:6d00::/64",
+    "VpcId": "vpc-0831f5660aa01a5e1",
+    "DryRun": false
+}
