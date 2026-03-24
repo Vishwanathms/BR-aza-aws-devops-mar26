@@ -1,0 +1,87 @@
+﻿10.0.0.0/8 
+
+
+no of host – 100
+2^7-- 128 
+
+/25 – subnet 
+
+how many networks – 100 
+2^7 – 100 
+
+25-7 == 18
+
+10.0.0.0/18 
+
+
+5 IP’s reserved per subnetwork 
+
+Network ID -- 
+Boradcat IP 
+Default gateway -
+DNS server IP 
+Spare failover IP
+
+
+=============
+nginx installation
+
+sudo dnf update -y
+sudo install nginx -y
+sudo systemctl status nginx
+sudo systemctl start nginx
+sudo systemctl status nginx
+sudo systemctl enable nginx
+
+curl localhost 
+
+
+D4 ======================
+
+#!/bin/bash
+
+sudo dnf install docker -y 
+
+sudo usermod -aG docker $USER
+newgrp docker 
+
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+docker ps 
+
+--------------
+docker run hello-world 
+docker image ls 
+docker ps 
+docker ps -a
+
+docker run –name con1 ubuntu:latest
+
+docker run –name nginx1 nginx:latest
+
+docker stop nginx1
+docker container prune 
+
+docker run -d –name nginx1 nginx:latest
+98514f380d2b678d69550ca0e850c79b2cbf1f78700a27fb06affe566b576502
+
+docker run -d --name ubuntu1 ubuntu sleep  180
+docker top ubuntu1
+docker ps 
+docker exec -it ubuntu1 /bin/bash 
+
+apt update
+apt install -y iputils-ping
+
+ping yahoo.com
+
+
+docker commit ubuntu1  ubuntu:v1
+
+
+
+==============================
+
+https://dontpad.com/aws-devops-mar26

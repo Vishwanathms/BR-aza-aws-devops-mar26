@@ -1,0 +1,92 @@
+﻿D5 --- 
+
+Task1
+create ec2 (amazon linux 2023) with below userdata 
+
+userdata 
+---------------------------
+#!/bin/bash
+
+sudo dnf install docker -y 
+
+sudo usermod -aG docker $USER
+newgrp docker
+
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+------------
+
+ip a show docker0
+
+ip a | grep veth
+
+docker run -d -p 8000:80 --name con1  nginx:latest 
+docker ps
+netstat -tlpn | grep 8000
+sudo netstat -tlpn | grep 8001
+
+docker run -d -p 8001:80 --name con2  nginx:latest
+sudo netstat -tlpn | grep 8001
+	
+
+docker exec -it con1 /bin/bash
+cd /usr/share/nginx/html/
+
+echo "2nd line added" >> index.html
+
+docker run -d -p 8000:80 -v /home/ec2-user/data/:/usr/share/nginx/html/  --name con1  nginx:latest 
+docker ps 
+curl localhost:8000
+
+
+docker run -d -p 8001:80 -v  /home/ec2-user/data/:/usr/share/nginx/html/  --name con2  nginx:latest 
+curl localhost:8001
+
+
+vishwacloudlab/python-gha-lab:539f7d1
+
+docker rm py01 -f 
+docker run -d -p 8005:8000 --name py01 vishwacloudlab/pythonapp:v4-var
+
+docker run -d -p 6379:6379 --name redis redis
+
+docker rm py01 redis -f 
+---------------------------
+To install docker compose on amazon linux 2023 
+
+sudo mkdir -p /usr/local/lib/docker/cli-plugins/
+
+sudo curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-$(uname -m) \
+-o /usr/local/lib/docker/cli-plugins/docker-compose
+
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+
+docker compose 
+
+version: '3.7'
+services:
+    web:
+      image: vishwacloudlab/pythonapp:v4-var
+      ports:
+        -  "8010:8000"
+    redis:
+      image: "redis:alpine"
+
+docker compose up -d
+
+docker compose scale web=3
+==============================
+Setup Jenkins 
+1.  installing jdk 17 on windows
+
+https://download.oracle.com/java/17/archive/jdk-17.0.12_windows-x64_bin.exe
+
+2. install the jenkins msi 
+
+https://get.jenkins.io/windows-stable/2.541.3/jenkins.msi
+
+timeout /t 130 /nobreak > nul
+
+ping 127.0.0.1 -n 200 > nul
