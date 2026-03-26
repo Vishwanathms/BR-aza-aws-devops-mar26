@@ -1,0 +1,96 @@
+pipeline {
+  agent {label 'vishwa-kube'}
+
+  triggers {
+    pollSCM('H/2 * * * *')
+  }
+
+  environment {
+    IMAGE_NAME = "vishwacloudlab/py-feb26"
+    Host_IP = "172.31.14.184"
+    Host_Port = "30110"
+    hub_cred = "vishwa-dockerhub-creds"
+    app_path = "python-sample-code"
+  }
+
+  stages {
+
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Check the docker cli') {
+      steps {
+        sh "docker --version"
+        sh "docker ps -a"
+      }
+    }
+    stage('Build Docker Image') {
+      steps {
+        sh '''
+          docker build -t ${IMAGE_NAME}:$BUILD_NUMBER ${app_path}
+        '''
+      }
+    }
+    stage('Trivy Image Scan') {
+      steps {
+        sh '''
+          trivy image \
+            --severity HIGH,CRITICAL \
+            --no-progress \
+            ${IMAGE_NAME}:$BUILD_NUMBER
+        '''
+      }
+    }
+    stage('Push Docker Image') {
+        steps {
+            withCredentials([
+            usernamePassword(
+                credentialsId: "${hub_cred}",
+                usernameVariable: 'DOCKERHUB_USER',
+                passwordVariable: 'DOCKERHUB_PASS'
+            )
+            ]) {
+            sh '''
+                echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
+                docker push ${IMAGE_NAME}:$BUILD_NUMBER
+                docker logout
+            '''
+            }
+        }
+    }
+
+    stage('Deploy - Template and Apply') {
+        steps {
+            sh '''
+            export IMAGE_TAG=$BUILD_NUMBER
+            envsubst < py-deploy.yaml | kubectl apply -f -
+            kubectl rollout status deployment/py-deploy
+            '''
+        }
+    }
+
+    stage('Check on Kubernetes') {
+      steps {
+        sh '''
+
+          kubectl get pods
+          kubectl get svc
+          kubectl get deployments
+          
+        '''
+      }
+    }
+
+    stage('Application Health Check') {
+      steps {
+        sh '''
+          sleep 10
+          curl http://${Host_IP}:${Host_Port}
+        '''
+      }
+    }
+  }
+}

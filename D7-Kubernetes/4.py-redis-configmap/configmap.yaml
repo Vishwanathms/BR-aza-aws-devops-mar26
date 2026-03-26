@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: py-config
+data:
+  REDIS_HOST: "redis-service"
+  APP_PORT: "8000"
