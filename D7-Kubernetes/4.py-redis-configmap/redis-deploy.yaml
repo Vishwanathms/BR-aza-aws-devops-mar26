@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deploy
+  name: redis-deploy-cm
 spec:
   replicas: 1
   strategy:
@@ -11,11 +11,11 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: redis-app
+      app: redis-app-cm
   template:
     metadata:
       labels:
-        app: redis-app
+        app: redis-app-cm
     spec:
       containers:
         - name: redis-container
