@@ -3,7 +3,7 @@
 
 terraform {
   # Minimum Terraform version required
-  required_version = "~> 1.13.5"
+  required_version = "~> 1.14.5"
 
   # Provider requirements
   required_providers {

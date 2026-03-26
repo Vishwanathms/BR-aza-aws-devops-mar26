@@ -1,1 +1,6 @@
 Ignore-docs
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.pem
+*.log
