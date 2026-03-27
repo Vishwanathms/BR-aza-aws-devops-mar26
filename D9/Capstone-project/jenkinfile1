@@ -1,0 +1,62 @@
+pipeline {
+    agent { label 'docker' }
+    triggers {
+        pollSCM('H/2 * * * *')   // every 2 minutes
+    }
+    
+    stages {
+        stage('Clone Repository') {
+            steps {
+               git branch: 'main',
+                    url: 'git@github.com:Thanmayi-GIT/TestRepositoryAWS.git',
+                    credentialsId: 'github-creds'
+            }
+        }
+
+        stage('Check the docker cli') {
+            steps {
+            sh "docker --version"
+            sh "docker ps -a"
+            sh "docker compose --version"
+            }
+        }
+
+        stage('Docker-Build') {
+            steps {
+                echo "Docker Build Step here..."
+                sh "docker build . -t pythonapp:v1"
+            }
+        }
+
+        stage('DockerContainer Creation') {
+            steps {
+                echo "Running Docker Compose here..."
+                sh "docker compose up -d"
+            }
+        }
+
+        stage('Cheking output') {
+            steps {
+                sh "docker ps"
+		        sh "docker compose ps"
+            }
+        }
+
+        stage('app working') {
+            steps {
+               sh "curl localhost:9010"
+            }
+        }
+
+        stage('Image Push') {
+            steps {
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 084375591912.dkr.ecr.us-east-1.amazonaws.com"
+                sh "docker tag pythonapp:v1 084375591912.dkr.ecr.us-east-1.amazonaws.com/pythonapp:v1"
+                sh "docker push 084375591912.dkr.ecr.us-east-1.amazonaws.com/pythonapp:v1"
+            }
+        }
+
+
+    }
+
+}
