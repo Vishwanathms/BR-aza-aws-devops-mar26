@@ -1,0 +1,27 @@
+# Terraform
+terraform.tfstate
+terraform.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+# SSH Keys
+*.pem
+jenkins_master.pub
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jenkins CLI
+jenkins-cli.jar
+
+# Logs
+*.log
